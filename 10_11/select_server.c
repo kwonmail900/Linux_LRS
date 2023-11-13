@@ -44,7 +44,16 @@ int main(int argc, char **argv)
 
     do {
         FD_SET(ssock, &readfd); 	/* 읽기 동작 감지를 위한 fd_set 자료형 설정 */
-	printf("ssock %d, readfd %s\n", ssock, readfd);
+	printf("ssock %d\n", ssock);
+	//printf("ssock %d, readfd %s\n", ssock, readfd);
+
+	printf("File descriptors in the set: ");
+	for (int i = 0; i < FD_SETSIZE; ++i) {
+		if (FD_ISSET(i, &readfd)) {
+			printf("%d ", i);
+		}
+	}
+	printf("\n");
 
         /* 클라이언트의 시작 주소부터 마지막 주소까지 fd_set 자료형에 설정 */
         for(start_index = 0; start_index < client_index; start_index++) {
