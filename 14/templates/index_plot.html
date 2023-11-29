@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sensor Data Plot</title>
+</head>
+<body>
+    <h1>Sensor Data Plot</h1>
+    <button onclick="updatePlot()">Update Plot</button><br>
+    <img id="plot" src="" alt="plot">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script type="text/javascript">
+	    const socket=io.connect('http://localhost:5001');
+	    socket.on('update_plot',function(filename){
+				document.getElementById('plot').src='static/'+filename+"?a="+Math.random();
+			});
+	    function updatePlot() {
+				socket.emit('get_plot'); 
+			}
+    </script>
+</body>
+</html>
